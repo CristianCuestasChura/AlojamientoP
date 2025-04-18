@@ -3,15 +3,15 @@ package com.alojamiento.AlojamientoP.model;
 public class Persona {
     private Long id;
     private String nombre;
-    private String ci;
+    private String gmail;
 
     public Persona() {
     }
 
-    public Persona(Long id, String nombre, String ci) {
+    public Persona(Long id, String nombre, String gmail) {
         this.id = id;
         this.nombre = nombre;
-        this.ci = ci;
+        this.id = id;
     }
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getCi() {
-        return ci;
+    public String getgmail() {
+        return gmail;
     }
 
-    public void setCi(String ci) {
-        this.ci = ci;
+    public void setgmail(String gmail) {
+        this.gmail = gmail;
     }
 }
