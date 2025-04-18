@@ -1,6 +1,7 @@
 package com.alojamiento.AlojamientoP.controller;
 
-import com.alojamiento.AlojamientoP.model.Persona;
+
+import  com.alojamiento.AlojamientoP.model.Persona;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class PersonaController {
     private final List<Persona> personas = new ArrayList<>();
 
     public PersonaController() {
-        personas.add(new Persona(1L, "Ana", "ana@gmail.com"));
+        personas.add(new Persona(1L, "Ana", "ana@email.com"));
     }
 
     @GetMapping
