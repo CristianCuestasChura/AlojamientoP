@@ -8,5 +8,15 @@
 <body>
 <h1>Personas</h1>
 <button submit="cargarPersonas()">Cargar Personas</button>
+<ul id="listaPersona"></ul>
+
+<h2> Agregar nueva personas</h2>
+<form onsubmit="crearPersona">
+    <label>nombre:</label>
+    <input type="text" id="nombre" required><br>
+    <label>Gmail:</label>
+    <input type="text" id="gmail" required><br>
+    <button type="submit">Guardar</button>
+</form>
 </body>
 </html>
