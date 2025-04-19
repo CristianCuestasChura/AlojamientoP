@@ -45,8 +45,8 @@ public class ClienteController {
     public Cliente update(@PathVariable Long id, @RequestBody Cliente actualizado) {
         for (Cliente c : clientes) {
             if (c.getId().equals(id)) {
-                c.setId(actualizado.getId);
-                c.setPersona(actualizado.getPersona());
+                c.setNombre(actualizado.getNombre());
+                c.setEstado(actualizado.getEstado());
                 logger.info("Cliente actualizado: {}", c);
                 return c;
             }
@@ -58,8 +58,8 @@ public class ClienteController {
     public Cliente patch(@PathVariable Long id, @RequestBody Cliente datos) {
         for (Cliente c : clientes) {
             if (c.getId().equals(id)) {
-                if (datos.getId() != null) c.setId(datos.getId);
-                if (datos.getPersona() != null) c.setPersona(datos.getPersona());
+                if (datos.getNombre() != null) c.setNombre(datos.getNombre());
+                if (datos.getEstado() != null) c.setEstado(datos.getEstado());
                 logger.info("Cliente parcialmente modificado: {}", c);
                 return c;
             }

@@ -2,14 +2,17 @@ package com.alojamiento.AlojamientoP.model;
 
 public class Cliente {
     private Long id;
-    private Persona persona;
+    private String nombre;
+    private String estado;
 
-    public Cliente() {
+    public Cliente(){
+
     }
 
-    public Cliente(Long id, Persona persona) {
+    public Cliente(Long id, String nombre, String estado) {
         this.id = id;
-        this.persona = persona;
+        this.nombre = nombre;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -20,11 +23,19 @@ public class Cliente {
         this.id = id;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
