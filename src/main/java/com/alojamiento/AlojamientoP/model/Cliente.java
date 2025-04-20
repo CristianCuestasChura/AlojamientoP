@@ -1,16 +1,19 @@
 package com.alojamiento.AlojamientoP.model;
 
 public class Cliente {
-    public Long getId;
-    private Long id;
-    private Persona persona;
+    public Long id;
+    private String nombre;
+    private String gmail;
+    private String telefono;
 
-    public Cliente(long l, String carlos, String reservado) {
+    public Cliente() {
     }
 
-    public Cliente(Long id, Persona persona) {
+    public Cliente(Long id, String nombre, String gmail, String telefono) {
         this.id = id;
-        this.persona = persona;
+        this.nombre = nombre;
+        this.gmail = gmail;
+        this.telefono = telefono;
     }
 
     public Long getId() {
@@ -21,11 +24,27 @@ public class Cliente {
         this.id = id;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }
