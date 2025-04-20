@@ -17,13 +17,11 @@ public class PersonaController {
     private static final Logger logger = LoggerFactory.getLogger(PersonaController.class);
     private final List<Persona> personas = new ArrayList<>();
 
-    public PersonaController() {
-        personas.add(new Persona(1L, "Ana", "ana@email.com"));
-    }
+
 
     @GetMapping
     public List<Persona> getAll() {
-        logger.info("Listando personas");
+        logger.info("Cargando Personas");
         return personas;
     }
 
@@ -32,14 +30,26 @@ public class PersonaController {
         Optional<Persona> persona = personas.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst();
-        return persona.orElse(null);
+        if (persona.isPresent()){
+            logger.info("persona encontrada: {}", persona.get().getNombre());
+            return persona.get();
+        } else {
+            logger.warn("la persona con el id {} no fue encontrada", id);
+            return null;
+        }
     }
 
     @PostMapping
     public Persona create(@RequestBody Persona nueva) {
+        if (nueva.getId()==null || nueva.getNombre()==null || nueva.getgmail()==null){
+            logger.error("Datos incompletos para la correcta realizacion de una nueva persona: {}",nueva);
+            return null;
+        }
         personas.add(nueva);
-        logger.info("Persona añadida: {}", nueva);
+        logger.info("La persona fue añadida correctamente: {}",nueva);
         return nueva;
+
+
     }
 
     @PutMapping("/{id}")
@@ -52,6 +62,7 @@ public class PersonaController {
                 return p;
             }
         }
+        logger.warn("No se pudo encontrar a la persona con el id: {} para la actualizacion", id);
         return null;
     }
 
@@ -65,12 +76,19 @@ public class PersonaController {
                 return p;
             }
         }
+        logger.warn("No se pudo encontrar a la persona con el id: {} para la actualizacion parcial", id);
         return null;
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         boolean eliminado = personas.removeIf(p -> p.getId().equals(id));
-        return eliminado ? "Persona eliminada" : "No se encontró la persona";
+        if (eliminado){
+            logger.info("la persona con el id {} fue correctamente eliminado", id);
+            return "persona eliminada";
+        }else {
+            logger.warn("No se pudo encontrar a la persona con el id: {} para ser eliminado", id);
+            return "persona no encontrada";
+        }
     }
 }
