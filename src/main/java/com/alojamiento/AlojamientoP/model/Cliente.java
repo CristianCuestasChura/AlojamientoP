@@ -1,10 +1,11 @@
 package com.alojamiento.AlojamientoP.model;
 
 public class Cliente {
+    public Long getId;
     private Long id;
     private Persona persona;
 
-    public Cliente() {
+    public Cliente(long l, String carlos, String reservado) {
     }
 
     public Cliente(Long id, Persona persona) {
