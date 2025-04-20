@@ -18,7 +18,7 @@ public class PersonaController {
     private final List<Persona> personas = new ArrayList<>();
 
     public PersonaController() {
-        personas.add(new Persona(23L, "Ana", "ana@email.com"));
+        personas.add(new Persona(1L, "Ana", "ana@email.com"));
     }
 
     @GetMapping

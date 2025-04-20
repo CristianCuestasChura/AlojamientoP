@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes</title>
+</head>
+<body>
+<h1>Clientes</h1>
+
+<button onclick="cargarClientes()">Cargar clientes</button>
+<ul id="listaClientes"></ul>
+
+<h2>Agregar nuevo cliente</h2>
+<form onsubmit="crearCliente(event)">
+    <label>Nombre:</label>
+    <input type="text" id="nombre" required><br>
+    <label>Número de habitación:</label>
+    <input type="number" id="habitacionId" required><br>
+    <button type="submit">Guardar</button>
+</form>
+
+<h2>Actualizar cliente</h2>
+<form onsubmit="actualizarCliente(event)">
+    <label>ID:</label>
+    <input type="number" id="edit-id" required><br>
+    <label>Nuevo nombre:</label>
+    <input type="text" id="edit-nombre"><br>
+    <label>Nuevo número de habitación:</label>
+    <input type="number" id="edit-habitacionId"><br>
+    <button type="submit">Actualizar (PATCH)</button>
+</form>
+
+<script>
+    function cargarClientes() {
+        fetch('/clientes')
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('listaClientes');
+                lista.innerHTML = '';
+                data.forEach(c => {
+                    const item = document.createElement('li');
+                    item.textContent = ID: ${c.id} - Nombre: ${c.nombre} - Habitación: ${c.habitacionId};
+
+                    const btnEliminar = document.createElement('button');
+                    btnEliminar.textContent = 'Eliminar';
+                    btnEliminar.onclick = () => eliminarCliente(c.id);
+
+                    item.appendChild(document.createTextNode(' '));
+                    item.appendChild(btnEliminar);
+                    lista.appendChild(item);
+                });
+            });
+    }
+
+    function crearCliente(event) {
+        event.preventDefault();
+        const nombre = document.getElementById('nombre').value;
+        const habitacionId = document.getElementById('habitacionId').value;
+
+        const nuevoCliente = {
+            nombre: nombre,
+            habitacionId: parseInt(habitacionId)
+        };
+
+        fetch('/clientes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoCliente)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Cliente agregado!");
+            cargarClientes();
+        });
+    }
+
+    function eliminarCliente(id) {
+        fetch(/clientes/${id}, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Cliente eliminado.");
+                cargarClientes();
+            } else {
+                alert("Error al eliminar.");
+            }
+        });
+    }
+
+    function actualizarCliente(event) {
+        event.preventDefault();
+        const id = document.getElementById('edit-id').value;
+        const nombre = document.getElementById('edit-nombre').value;
+        const habitacionId = document.getElementById('edit-habitacionId').value;
+
+        const datosActualizados = {};
+        if (nombre) datosActualizados.nombre = nombre;
+        if (habitacionId) datosActualizados.habitacionId = parseInt(habitacionId);
+
+        fetch(/clientes/${id}, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosActualizados)
+})
+        .then(response => {
+            if (response.ok) {
+                alert("Cliente actualizado.");
+                cargarClientes();
+            } else {
+                alert("Error al actualizar.");
+            }
+        });
+    }
+</script>
+</body>
+</html>
