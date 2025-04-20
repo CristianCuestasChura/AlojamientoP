@@ -1,7 +1,7 @@
 package com.alojamiento.AlojamientoP.model;
 
 public class Habitacion {
-    private long id;
+    private Long id;
     private String numero;
     private String tipo;
     private int capacidad;
@@ -10,18 +10,18 @@ public class Habitacion {
 
     }
 
-    public Habitacion(long id, String numero, String tipo, int capacidad) {
+    public Habitacion(Long id, String numero, String tipo, int capacidad) {
         this.id = id;
         this.numero = numero;
         this.tipo = tipo;
         this.capacidad = capacidad;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
