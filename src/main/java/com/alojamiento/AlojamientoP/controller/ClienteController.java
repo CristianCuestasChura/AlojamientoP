@@ -41,7 +41,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> create(@RequestBody Cliente nuevo) {
         if (nuevo.getId() == null || nuevo.getNombre() == null || nuevo.getGmail() == null || nuevo.getTelefono() == null) {
             logger.error("los datos estan incompletos para la creacion de un cliente: {}", nuevo);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
         clientes.add(nuevo);
         logger.info("Cliente añadido: {}", nuevo);

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta General</title>
+</head>
+<body>
+<h1>Consulta de Personas, Clientes y Habitaciones</h1>
+
+<!-- === PERSONAS === -->
+<h2>Personas</h2>
+<button onclick="cargarPersonas()">Ver todas las personas</button>
+<ul id="listaPersonas"></ul>
+
+<input type="number" id="idPersona" placeholder="Buscar Persona por ID">
+<button onclick="buscarPersona()">Buscar</button>
+<p id="resultadoPersona"></p>
+
+<!-- === CLIENTES === -->
+<h2>Clientes</h2>
+<button onclick="cargarClientes()">Ver todos los clientes</button>
+<ul id="listaClientes"></ul>
+
+<input type="number" id="idCliente" placeholder="Buscar Cliente por ID">
+<button onclick="buscarCliente()">Buscar</button>
+<p id="resultadoCliente"></p>
+
+<!-- === HABITACIONES === -->
+<h2>Habitaciones</h2>
+<button onclick="cargarHabitaciones()">Ver todas las habitaciones</button>
+<ul id="listaHabitaciones"></ul>
+
+<input type="number" id="idHabitacion" placeholder="Buscar Habitación por ID">
+<button onclick="buscarHabitacion()">Buscar</button>
+<p id="resultadoHabitacion"></p>
+
+<script>
+    // PERSONAS
+    function cargarPersonas() {
+        fetch('/personas')
+            .then(res => res.json())
+            .then(data => {
+                const lista = document.getElementById("listaPersonas");
+                lista.innerHTML = "";
+                data.forEach(p => {
+                    const li = document.createElement("li");
+                    li.textContent = `ID: ${p.id} - Nombre: ${p.nombre} - Gmail: ${p.gmail}`;
+                    lista.appendChild(li);
+                });
+            });
+    }
+
+    function buscarPersona() {
+        const id = document.getElementById("idPersona").value;
+        fetch(`/personas/${id}`)
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(p => {
+                document.getElementById("resultadoPersona").textContent =
+                    `ID: ${p.id} - Nombre: ${p.nombre} - Gmail: ${p.gmail}`;
+            })
+            .catch(() => {
+                document.getElementById("resultadoPersona").textContent = "Persona no encontrada.";
+            });
+    }
+
+    // CLIENTES
+    function cargarClientes() {
+        fetch('/clientes')
+            .then(res => res.json())
+            .then(data => {
+                const lista = document.getElementById("listaClientes");
+                lista.innerHTML = "";
+                data.forEach(c => {
+                    const li = document.createElement("li");
+                    li.textContent = `ID: ${c.id} - Nombre: ${c.nombre} - Gmail: ${c.gmail} - Teléfono: ${c.telefono}`;
+                    lista.appendChild(li);
+                });
+            });
+    }
+
+    function buscarCliente() {
+        const id = document.getElementById("idCliente").value;
+        fetch(`/clientes/${id}`)
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(c => {
+                document.getElementById("resultadoCliente").textContent =
+                    `ID: ${c.id} - Nombre: ${c.nombre} - Gmail: ${c.gmail} - Teléfono: ${c.telefono}`;
+            })
+            .catch(() => {
+                document.getElementById("resultadoCliente").textContent = "Cliente no encontrado.";
+            });
+    }
+
+    // HABITACIONES
+    function cargarHabitaciones() {
+        fetch('/habitaciones')
+            .then(res => res.json())
+            .then(data => {
+                const lista = document.getElementById("listaHabitaciones");
+                lista.innerHTML = "";
+                data.forEach(h => {
+                    const li = document.createElement("li");
+                    li.textContent = `ID: ${h.id} - Número: ${h.numero} - Tipo: ${h.tipo}`;
+                    lista.appendChild(li);
+                });
+            });
+    }
+
+    function buscarHabitacion() {
+        const id = document.getElementById("idHabitacion").value;
+        fetch(`/habitaciones/${id}`)
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(h => {
+                document.getElementById("resultadoHabitacion").textContent =
+                    `ID: ${h.id} - Número: ${h.numero} - Tipo: ${h.tipo}`;
+            })
+            .catch(() => {
+                document.getElementById("resultadoHabitacion").textContent = "Habitación no encontrada.";
+            });
+    }
+</script>
+</body>
+</html>
