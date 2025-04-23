@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Consulta General</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
 </head>
 <body>
 <h1>Consulta de Personas, Clientes y Habitaciones</h1>
 
 <!-- ******** PERSONAS ******** -->
+<section>
 <h2>Personas</h2>
 <button onclick="cargarPersonas()">Ver todas las personas</button>
 <ul id="listaPersonas"></ul>
@@ -15,8 +17,9 @@
 <input type="number" id="idPersona" placeholder="Buscar Persona por ID">
 <button onclick="buscarPersona()">Buscar</button>
 <p id="resultadoPersona"></p>
-
+</section>
 <!-- ******** CLIENTES ******** -->
+<section>
 <h2>Clientes</h2>
 <button onclick="cargarClientes()">Ver todos los clientes</button>
 <ul id="listaClientes"></ul>
@@ -24,8 +27,9 @@
 <input type="number" id="idCliente" placeholder="Buscar Cliente por ID">
 <button onclick="buscarCliente()">Buscar</button>
 <p id="resultadoCliente"></p>
-
+</section>
 <!-- ******** HABITACIONES ******** -->
+<section>
 <h2>Habitaciones</h2>
 <button onclick="cargarHabitaciones()">Ver todas las habitaciones</button>
 <ul id="listaHabitaciones"></ul>
@@ -33,7 +37,7 @@
 <input type="number" id="idHabitacion" placeholder="Buscar Habitación por ID">
 <button onclick="buscarHabitacion()">Buscar</button>
 <p id="resultadoHabitacion"></p>
-
+</section>
 <script>
     // PERSONAS
     function cargarPersonas() {
